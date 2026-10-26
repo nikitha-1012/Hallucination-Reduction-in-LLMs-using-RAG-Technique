@@ -14,7 +14,7 @@ function App() {
 
     try {
       // Connects to your FastAPI backend
-      const response = await fetch('http://127.0.0.1:8000/api/ask', {
+      const response = await fetch("http://127.0.0.1:8000/api/ask", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

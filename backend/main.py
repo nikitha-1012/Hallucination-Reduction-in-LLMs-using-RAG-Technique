@@ -25,10 +25,10 @@ def ask_systems(request: QueryRequest):
     """
     question = request.query
     
-    # Execute the systems (for production, these could be run asynchronously)
+    # Execute the systems (updated System C call for Stage 2 pipeline)
     ans_a = run_system_a(question)
     ans_b, docs_b = run_system_b(question, k=2)
-    ans_c, docs_c = run_system_c(question, k=3, threshold=0.45)
+    ans_c, docs_c = run_system_c(question, k=5)
     
     return {
         "system_a": {
