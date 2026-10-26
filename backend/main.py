@@ -1,3 +1,5 @@
+import csv
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,3 +45,20 @@ def ask_systems(request: QueryRequest):
             "filtered_chunks": [{"text": t, "score": s} for t, s in docs_c]
         }
     }
+
+@app.get("/api/evaluation-results")
+def get_evaluation_results():
+    """
+    Reads the batch evaluation summary CSV and serves it to the frontend dashboard.
+    """
+    results_path = "results/evaluation_summary.csv"
+    if not os.path.exists(results_path):
+        return {"error": "Evaluation summary not found. Please run evaluate_systems.py first."}
+    
+    rows = []
+    with open(results_path, mode="r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            rows.append(row)
+            
+    return {"results": rows}
