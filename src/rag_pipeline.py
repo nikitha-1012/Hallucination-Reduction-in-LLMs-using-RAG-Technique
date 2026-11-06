@@ -6,7 +6,13 @@ from sentence_transformers import SentenceTransformer
 from groq import Groq
 
 # 1. Initialize global resources
-client = Groq(api_key="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")
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# 1. Initialize global resources
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # Use the globally supported model for all API calls
 MODEL_NAME = "openai/gpt-oss-20b"
